@@ -3,11 +3,21 @@ import dotenv from 'dotenv';
 import express from 'express';
 import mongoSanitize from 'express-mongo-sanitize';
 import rateLimit from 'express-rate-limit';
+import fs from 'fs';
 import helmet from 'helmet';
 import morgan from 'morgan';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import authRoutes from './routes/authRoutes.js';
 import taskRoutes from './routes/taskRoutes.js';
 import { errorHandler, notFound } from './middleware/errorMiddleware.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const clientDistPath = path.resolve(__dirname, '../frontend/dist');
+const shouldServeClient =
+  process.env.SERVE_CLIENT === 'true' &&
+  fs.existsSync(path.join(clientDistPath, 'index.html'));
 
 dotenv.config();
 
@@ -52,6 +62,22 @@ app.get('/api/health', (req, res) => {
 
 app.use('/api/auth', authRoutes);
 app.use('/api/tasks', taskRoutes);
+
+if (shouldServeClient) {
+  app.use(express.static(clientDistPath));
+
+  app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api')) {
+      return next();
+    }
+
+    res.sendFile(path.join(clientDistPath, 'index.html'), (error) => {
+      if (error) {
+        next(error);
+      }
+    });
+  });
+}
 
 app.use(notFound);
 app.use(errorHandler);

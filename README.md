@@ -222,6 +222,27 @@ If you accidentally set `VITE_API_URL` to the backend root, such as `https://tas
 
 For Netlify single-page routing, add a redirect from `/*` to `/index.html` with status `200`.
 
+### Frontend on Render Static Site
+
+React Router needs a rewrite rule so refreshing `/login`, `/register`, or any dashboard route still serves `index.html`.
+
+If you use the included `render.yaml` Blueprint, the frontend service includes:
+
+```yaml
+routes:
+  - type: rewrite
+    source: /*
+    destination: /index.html
+```
+
+If you created the Render static site manually, open the frontend service in Render, go to **Redirects/Rewrites**, and add:
+
+```text
+Source: /*
+Destination: /index.html
+Action: Rewrite
+```
+
 ## Sample Screenshots Description
 
 - Login screen: glass panel authentication form, password visibility control, brand visual, light/dark toggle.
