@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    letter-spacing: 0;
+  }
+
+  html {
+    min-height: 100%;
+  }
+
+  body {
+    min-height: 100vh;
+    margin: 0;
+    color: #0f172a;
+    background:
+      linear-gradient(135deg, rgba(248, 250, 252, 0.98) 0%, rgba(236, 253, 245, 0.84) 26%, rgba(255, 247, 237, 0.9) 54%, rgba(239, 246, 255, 0.95) 100%);
+    font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  }
+
+  .dark body {
+    color: #e5e7eb;
+    background:
+      linear-gradient(135deg, rgba(15, 23, 42, 1) 0%, rgba(17, 24, 39, 0.96) 34%, rgba(49, 46, 129, 0.88) 70%, rgba(6, 78, 59, 0.72) 100%);
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply border border-white/70 bg-white/75 shadow-glass backdrop-blur-2xl dark:border-white/10 dark:bg-slate-950/60;
+  }
+
+  .glass-card {
+    @apply border border-white/70 bg-white/80 shadow-soft backdrop-blur-xl transition duration-200 dark:border-white/10 dark:bg-slate-900/70;
+  }
+
+  .field {
+    @apply h-11 w-full rounded-lg border border-slate-200/90 bg-white/90 px-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-sky-400 focus:ring-4 focus:ring-sky-100 dark:border-white/10 dark:bg-slate-950/70 dark:text-slate-100 dark:placeholder:text-slate-500 dark:focus:border-sky-400 dark:focus:ring-sky-950;
+  }
+
+  .textarea-field {
+    @apply min-h-28 w-full resize-none rounded-lg border border-slate-200/90 bg-white/90 px-3 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-sky-400 focus:ring-4 focus:ring-sky-100 dark:border-white/10 dark:bg-slate-950/70 dark:text-slate-100 dark:placeholder:text-slate-500 dark:focus:border-sky-400 dark:focus:ring-sky-950;
+  }
+
+  .select-field {
+    @apply h-11 w-full rounded-lg border border-slate-200/90 bg-white/90 px-3 text-sm font-medium text-slate-700 outline-none transition focus:border-sky-400 focus:ring-4 focus:ring-sky-100 dark:border-white/10 dark:bg-slate-950/70 dark:text-slate-200 dark:focus:ring-sky-950;
+  }
+
+  .icon-button {
+    @apply inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-slate-200/80 bg-white/80 text-slate-600 shadow-sm transition hover:bg-white hover:text-slate-950 focus:outline-none focus:ring-4 focus:ring-sky-100 disabled:cursor-not-allowed disabled:opacity-60 dark:border-white/10 dark:bg-slate-900/70 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white dark:focus:ring-sky-950;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
