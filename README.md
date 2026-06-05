@@ -218,6 +218,8 @@ Status update body:
 4. Use `dist` as the publish directory.
 5. Add `VITE_API_URL=<deployed backend URL>/api`.
 
+If you accidentally set `VITE_API_URL` to the backend root, such as `https://taskflow-riur.onrender.com`, the client normalizes it to `https://taskflow-riur.onrender.com/api`. Redeploy the frontend after changing any Vite environment variable because Vite injects these values at build time.
+
 For Netlify single-page routing, add a redirect from `/*` to `/index.html` with status `200`.
 
 ## Sample Screenshots Description
